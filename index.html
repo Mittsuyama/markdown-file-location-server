@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <title>test</title>
+  <style>
+    button {
+      font-size: 20px;
+      margin: 10px 10px;
+    }
+  </style>
+</head>
+  <body>
+    <div stlye="display: flex;">
+      <button onclick="getter('get-folder-list')">get folder list</button>
+      <br>
+      <input id="content">
+      <button onclick="getter(
+              'get-folder-content?id=' + 
+              document.getElementById('content').value)"
+      >
+        get folder content
+      </button>
+      <br>
+      <button>get trash list</button>
+      <br>
+    </div>
+  </body>
+  <script>
+    async function getter(url, body = {}) {
+      const result = await fetch(`http://localhost:7777/api/${url}`, body);
+      const content = await result.text();
+      console.log(JSON.parse(content));
+    }
+  </script>
+</html>
